@@ -1,0 +1,329 @@
+/*GLOBAL*/
+html{
+    margin:50px;
+}
+html,body{
+    height: 100%;
+}
+body{
+    margin:0;
+    padding: 0;
+    font-family: Helvetica;
+}
+#page{
+    margin:0 auto;
+    width: 1000px;
+    position: absolute;
+    z-index: 0;
+    right:0;
+    left:0;
+}
+header{
+    left: 0;
+    margin: 0px auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 1000px;
+    z-index: 90;
+    padding-bottom: 10px;
+    overflow: hidden;
+}
+header div{
+    padding-top: 30px;
+    background: none repeat scroll 0 0 #FFFFFF;
+    -moz-box-shadow: 0 3px 5px #ccc;
+    -webkit-box-shadow: 0 3px 5px #ccc;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    box-shadow: 0 3px 5px #ccc;
+    height: 90px;
+}
+img{
+    border:0;
+}
+.left{
+    float:left;
+}
+.right{
+    float: right;
+}
+/*
+clr:after{
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    clear: both;
+    background: #f09;
+}
+*/
+.clr{
+    clear: both;
+}
+.corner-5{
+    border-radius: 8px 0px 0px 8px;
+    -moz-border-radius: 8px 0px 0px 8px;
+    -webkit-border-radius: 8px 0px 0px 8px;
+}
+.corner-5500{
+    border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+}
+.shadow,
+.open{
+    box-shadow: 0px 0px 8px #000;
+    -moz-box-shadow: 0px 0px 8px #000;
+    -webkit-box-shadow: 0px 0px 8px #000;
+}
+a:focus{
+    outline: none;
+}
+.hide{
+    display: none;
+}
+.tip {
+    color: #fff;
+    background:#1d1d1d;
+    display:none; /*--Hides by default--*/
+    padding:10px;
+    position:absolute;    
+    z-index:1000;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+/*FORM*/
+.txt-input,
+.input{
+    color:#aaa;
+    margin: 3px 0;
+    font-family: Helvetica;
+    font-size: 11px;
+}
+.txt-input{
+    width: 250px;
+}
+.input{
+    width: 200px;
+}
+.txt-input:focus,
+.input:focus{
+    color:#000;
+}
+label.error{
+    float: left;
+    font-size: 10px;
+    font-weight: bold;
+    color:#F0F;
+}
+.submit{
+    margin-top:20px;
+    display: block;
+}
+#sent{
+    display:none;
+}
+#loading{
+    display: none;
+}
+#contact{/*SLIDEOUT*/
+    padding: 20px;
+    width: 250px;
+    background: #FFF;
+    border: 1px solid #29216d;
+    position: static;
+    margin-top:50px;
+    position: fixed; 
+    z-index: 200;
+    min-height: 100px;
+}      
+/**/
+.work{
+    margin:10px;
+    padding:5px;
+    display: ;
+    position: relative;
+    padding: 5px;
+	float: left;
+	position: relative;  /* Set the absolute positioning base coordinate */
+	z-index: 5;
+}
+.work:hover{
+    padding:30px;
+    z-index: 100;
+    position: relative;
+	background: #fff;
+	margin:-16px -16px -41px ;
+	width:200px;
+	height: auto;
+	border: 1px solid #ddd;
+}
+/*FOOTER*/
+footer{
+    padding: 10px;
+    width: 1000px; 
+    display: block;
+}
+.social_link{
+    margin:0 3px;
+}
+#footer-wrapper{
+    position: fixed;
+    bottom: 0;
+    background: #fff;
+    width: 1000px;
+    z-index: 90;
+    box-shadow: 0px -3px 5px #ccc;
+    -moz-box-shadow: 0px -3px 5px #ccc;
+    -webkit-box-shadow: 0px -3px 5px #ccc;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    left:0;
+    right:0;
+    margin:0 auto;
+    padding: 10px;
+}
+#copy{
+    font-size:10px;
+}
+#copy a:link,
+#copy a:visited{
+    font-size:10px;
+    font-weight:bold;
+    text-decoration: none;
+    color:#000;
+}
+#copy a:hover{
+    color:#f0f;
+    font-weight:bold;
+    text-decoration: underline;
+}
+.title{
+    background: #fff;
+    padding: 5px;
+    z-index: 10;
+    position: relative;
+    text-align: center;
+    font-size: 11px;
+    font-weight: bold;
+    color:#000;
+    display: none;
+}
+.link:link,
+.link:visited{
+    text-decoration: none;
+    color: #999;
+}
+.link:hover{
+    text-decoration: underline;
+    color:#F0F;
+}
+ul.thumb {
+	float: left;
+	list-style: none;
+	margin: 70px 0; 
+	padding: 10px;
+}
+/* TWITTER */
+#twitter-wrapper{
+}
+#twitter{
+    display: none;
+    width:325px;
+    margin-top: -229px;
+    height: 200px;
+    background: #fff;
+    right: 0;
+    position: absolute;
+    border:1px solid #999;
+}
+#twitter_update_list{
+    margin: 0;
+    padding-bottom: 10px;
+}
+#twitter_update_list li{
+    list-style-image: url("../../img/logo_twitter.gif");
+    font-size: 11px;
+    margin:4px 0;
+}
+#twitter_update_list li span{
+    display: block;
+}
+#profileLink:link,
+#profileLink:visited,
+#twitter_update_list li a:link,
+#twitter_update_list li a:visited{
+    color:#46c8f5;
+    text-decoration: none;
+    font-weight: bold;
+}
+.firstTweet{
+    padding-top: 10px;
+    margin-top:0 !important;
+}
+.lastTweet{
+    margin-bottom: 0 !important;
+}
+#twitter_update_list li a:hover{
+    color:#46c8f5;
+    text-decoration: underline;
+}
+#twitter h2{
+    margin:0;
+    padding:5px 10px;
+    font-size: 13px;
+    color:#fff;
+    background: #46c8f5;
+}
+#profileLink{
+    bottom: 0;
+    font-size: 10px;
+    margin: 0 0 10px 25px;
+    position: absolute;
+}
+/*RESUME FANCYBOX STYLING*/
+.resume-title, .resume-location, .resume-content{
+	margin:0;	
+	color:#000;
+}
+.resume-title{
+	font-size:18px;	
+}
+.resume-location{
+	font-size:14px;
+}
+ul.resume-list, p.resume-list{
+	line-height:20px;
+	color:#000;
+	font-size:12px;
+	margin-bottom:0;
+	width:600px;
+	display:inline;
+}
+.resume-list li{
+	width:600px;
+}
+.resume-logo{
+	margin-top:20px;
+	margin-right:20px;
+	width:150px;
+	height:auto;
+	overflow:visible;
+	display:block;
+}
+.resume-content{
+	width:600px;
+	display:block;
+}
+#next{
+    text-align: center;
+    color: #f09;
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: none;
+}
