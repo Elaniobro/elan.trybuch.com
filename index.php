@@ -9,26 +9,47 @@
   <meta name="keywords" content="Elan, Elan Trybuch, Trybuch, Frontend, Front End, Engineer, Developer, Designer, javascript, HTML, css, css3, HTML5, jQuery, digital, Digital marketing, advertising, media planning, SEM, Search engine marketing, search engine optimization, SEO, Internet marketing, communications, Cost-effective, brand awareness, viral campaign, online market">
   <meta name="description" content="Elan Trybuch is a well versed Front End engineer, working on client side websites and projects with over 5+ years of experience. Elan Trybuch is an affordable, honest businessman who is easily accesible and great to work with.">
   <link rel="stylesheet" href="com/css/styles.css" type="text/css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.js"></script>
+<script src="com/js/mustache.js"></script>    
 </head>
 <body>
     <div role="main">
         <header id="header">
             <nav>
                 <h1 id="name"><a href="#biography">Portfolio Site of Elan Trybuch, New York, NY</a></h1>
-                <div>
-                    <a class="social" id="twitter"  href="http://twitter.com/home?status=@elaniobro%20I%20saw%20your%20site%20and%20would%20like%20to%20connect.%20%23WebDeveloper%20#Frontend%20#HTML%20#CSS%20#javaScript%20" title="Read the most recent tweets"></a>
-                    <a class="social" id="linkedin"  title="Become a part of my professional circle" href="http://www.linkedin.com/in/elantrybuch" target="_blank"></a>
-                    <a class="social" id="github"  title="Collobrate on open source projects with me" href="https://github.com/Elaniobro" target="_blank"></a>
-                    <a class="social" id="skype" title="Save on long distance calls" href="skype:elaniobro?call"></a>
-                    <?php #<a class="social" id="facebook" title="like this page on facebook"></a>?>
-                    <a class="social" id="googleplus" title="Interact with me on +google" href="https://plus.google.com/115362919020637883393/"></a>
-                </div>
-            </nav><!-- /nav -->            
+                <ul id="social">
+                    <li class="social"><a id="twitter"  href="http://twitter.com/home?status=@elaniobro%20I%20saw%20your%20site%20and%20would%20like%20to%20connect.%20%23WebDeveloper%20#Frontend%20#HTML%20#CSS%20#javaScript%20" title="Read the most recent tweets"></a></li>
+                    <li class="social"><a id="linkedin"  title="Become a part of my professional circle" href="http://www.linkedin.com/in/elantrybuch" target="_blank"></a></li>
+                    <li class="social"><a id="github"  title="Collobrate on open source projects with me" href="https://github.com/Elaniobro" target="_blank"></a></li>
+                    <li class="social"><a id="skype" title="Save on long distance calls" href="skype:elaniobro?call"></a></li>
+                    <?php #<a class="social" id="facebook" title="like this page on facebook"></a>?></li>
+                    <li class="social"><a id="googleplus" title="Interact with me on +google" href="https://plus.google.com/115362919020637883393/"></a></li>
+                </ul>
+            </nav><!-- /nav -->   
+            <div id="test"></div>         
         </header><!-- /header -->
-        <section>
+        <section id="content">
             <!-- Article content goes here via json feed -->
+           <script id="template" type="text/x-mustache">
+                {{#.}}
+                <article id='{{gsx$tag.$t}}' class='clr'>
+                    <div>
+                        <figure class='thumb' style='background-position-y:{{gsx$thumbpos.$t}}'>
+                            {{gsx$company.$t}} : {{gsx$project.$t}} 
+                         </figure>
+                         <figcaption>
+                            {{gsx$company.$t}} 
+                            {{#gsx$active.$t}}
+                             <a href='{{gsx$pURL.$t}}' target='_blank'>"{{gsx$project.$t}}"</a>                             
+                            {{/gsx$active.$t}}                            
 
+                            {{^gsx$active.$t}}
+                            <div>"{{gsx$project.$t}}"</div>
+                            {{/gsx$active.$t}}                            
+                        </figcaption>
+                    </div>
+                </article>
+                {{/.}}
+            </script>
         </section><!-- /section -->
         <footer id="footer">
             <nav>
@@ -38,35 +59,31 @@
         </footer><!-- /footer -->
     </div><!-- /main -->
     <script>
-        $(function() {
-            var $header = $('header').height();
-            $('section').css({'margin-top': $header});
-            
+        (function() {
+            res = document.createElement('script');
+            res.type = 'text/javascript';
+            res.src = 'https://spreadsheets.google.com/feeds/list/0AipUB_CfF40ldHQ1X2N6VUl3a2NoUTViUnpOWHlEM3c/od6/public/values?alt=json-in-script&callback=site';
+            document.head.appendChild(res);
 
-            window.onresize=function(){
-                var $doc = $(document).width();
-                var $thumb = 200;
-                var $count = Math.floor($doc/$thumb)*2;
-                var $columns = Math.floor($doc/$thumb);
-                var $remainder = ($columns * $thumb) - $doc;
-                var $margin = Math.floor(-1*(($remainder/$count)/2));
-                console.log("count: " + $count)
-                console.log("remainder: " + $remainder);
-                console.log("margin: " + $margin)
-                //$('.thumb').css({'margin-left' : $margin, 'margin-right' : $margin});
-                
-            }
-            var imgPath = '../img/';
-            // getJSON to pull in the json from the php script.
-            $.getJSON( "json.php", function( jsonData ) {
-                //loop itteration
-                $.each(jsonData, function(key, val) {
-                    $('section').append("<article id='" + val['tag'] + "' class='clr'> <div class='thumb' style='background-position-y:" + val['thumbPos'] + "'></div><h2>" + val['company'] + "<a href='" + val['pURL'] + "'>" + val['project'] + "</a></h2></article>");
-               });
-       
-                console.log( "JSON Data: " + jsonData[0]['id2'] );
-            });
-        })
+            //Callback JSON(p)
+            site = function (res){
+                if (!res){
+                    return;
+                }else{
+                    console.log(res.feed.entry[3]);
+                    data = res.feed.entry,
+                    //get a reference to our HTML template
+                    template = document.getElementById('template').innerHTML,
+                    //tell Mustache.js to iterate through the JSON and insert the data into the HTML template
+                    output = Mustache.render(template, data);
+                    //append the HTML template to the DOM
+                    document.getElementById('content').innerHTML = output;
+                }
+            }            
+        })();            
+
     </script>
+    
+
 </body>   
 </html>
