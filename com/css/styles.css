@@ -151,24 +151,6 @@ section{
     align-content:flex-start;
     margin-top:147px;
 }
-#test{
-        opacity: .35;
-    -webkit-transition: opacity 1s ease-in-out, border 1s ease-in-out, background-color #00f ease-in-out;
-       -moz-transition: opacity 1s ease-in-out, border 1s ease-in-out, background-color #00f ease-in-out;
-        -ms-transition: opacity 1s ease-in-out, border 1s ease-in-out, background-color #00f ease-in-out;
-         -o-transition: opacity 1s ease-in-out, border 1s ease-in-out, background-color #00f ease-in-out;
-            transition: opacity 1s ease-in-out, border 1s ease-in-out, background-color #00f ease-in-out;
-    border: 1px solid #f09;
-    height: 100px;
-    width: 100px;
-
-}
-#test:hover{
-        opacity: 1;
-    filter: alpha(opacity=100);
-    background: #f09;
-
-}
 section article{
     margin-right: 8px;
     text-align: center;

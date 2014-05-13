@@ -25,7 +25,6 @@
                     <li class="social"><a id="googleplus" title="Interact with me on +google" href="https://plus.google.com/115362919020637883393/"></a></li>
                 </ul>
             </nav><!-- /nav -->   
-            <div id="test"></div>         
         </header><!-- /header -->
         <section id="content">
             <!-- Article content goes here via json feed -->
