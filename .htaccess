@@ -1,0 +1,5 @@
+RewriteRule %{HTTP_HOST} !^www.trybuch.com$
+RewriteRule %{HTTP_HOST} !^trybuch.com$
+RewriteCond %{HTTP_HOST} ^(.*)\.trybuch.com$
+RewriteRule ^/(.*)$ http://trybuch.com/%1/$1 [QSA]
+AddType application/x-httpd-php .php
