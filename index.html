@@ -27,7 +27,7 @@
 
        </script>
     </div>
-    <div role="main">
+    <div role="main" id="main">
         <header id="header">
             <nav>
                 <h1 id="name"><a href="#biography">Portfolio Site of Elan Trybuch, New York, NY</a></h1>
@@ -56,11 +56,9 @@
                          <figcaption id="figcaption-{{@index}}" class="figcaption">
                             {{gsx$company.$t}} 
                             {{#if gsx$active.$t}}
-                             <a id='{{@index}}' class='foo' href='javaScript:void(0);' onclick='openLightBox({{@index}})'>{{gsx$project.$t}}</a>                           
+                                <a id='{{@index}}' class='foo' href='#'>{{gsx$project.$t}}</a>                           
                             {{else}}                            
-                           
-                          
-                            <div>{{gsx$project.$t}}</div>
+                                <div>{{gsx$project.$t}}</div>
                             {{/if}}                            
                         </figcaption>
                     </div>
@@ -111,52 +109,39 @@
             // Adding the Year for copyright
             document.getElementById('year').innerHTML = year;       
 
-
-            // Create Obj with links
-            var obArticles = document.getElementsByTagName('article');
-            console.log(obArticles.length);
-            // Itterate over the obLinks obj to bind click event.
-            for (link in obArticles){
-                console.log(obArticles);
-                // Type Check
-                if( typeof obArticles[link] === 'number'){                
-                    break;
-                }
-                //bindding click event to each article link type.
-                obArticles[link].addEventListener("click", function relatedLinks(){
-                    document.getElementById('lb').style.display='block';
-                    document.getElementById('lb-container-overlay').style.display='block';
-                }, false);
-            }            
+            //Get the element to add a click listener to open lightbox
+            document.getElementById('content').addEventListener("click", function(e){
+                //Check to make sure the element clicked is a div.
+                if(e.target && e.target.parentNode.nodeName == "DIV"){
+                    //set variable to that of the anchor tag id.
+                    this_id = e.target.parentNode.childNodes[3].childNodes[1].id;
+                    
+                    //create variables for elements.
+                    light = document.getElementById('lb'),    
+                    overlay = document.getElementById('overlay');
+                    //change the css styles of these elements to make visible.
+                    light.style.display='block';            
+                    overlay.style.display='block';
+                   
+                    //get a reference to our HTML source
+                    countentSource = document.getElementById('content-template').innerHTML;
+                    //tell Mustache.js to iterate through the JSON and insert the data into the HTML contentTemplate
+                    contentTemplate = Handlebars.compile(countentSource);
+                    //append the HTML contentTemplate to the DOM
+                    document.getElementById('lb').innerHTML = contentTemplate(data.entry[this_id]);
+               }
+            })
+            //Add click event to the close button to close lightbox.
+            document.getElementById('lb').addEventListener("click", function(e){
+                console.log(e.target.nodeName);
+                //change the css stles of these elements to hide.
+                light.style.display='none';
+                overlay.style.display='none';
+                //re-insert the template to allow the next click event to parse.
+                light.innerHTML = '<script id="content-template" type="text/x-handlebars-template"><a href="#" class="close">Close<\/a><img src="{{gsx$logo.$t}}"\/><ul>{{{gsx$html.$t}}}<\/ul><\/script>';
+            })
+            console.log('♖ ♘ ♗ ♔ ♕ ♗ ♘ ♖ \n♙ ♙ ♙ ♙   ♙ ♙ ♙ \n\n        ♙    \n\n\n\n♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ \n♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜\n\n\n\nYour move.');       
         })();      
-
-        function openLightBox(this_id){
-            //create variables for elements.
-            light = document.getElementById('lb'),    
-            overlay = document.getElementById('overlay');
-            //change the css styles of these elements to make visible.
-            light.style.display='block';            
-            overlay.style.display='block';
-
-
-            //get a reference to our HTML source
-            countentSource = document.getElementById('content-template').innerHTML;
-            //tell Mustache.js to iterate through the JSON and insert the data into the HTML contentTemplate
-            contentTemplate = Handlebars.compile(countentSource);
-            //append the HTML contentTemplate to the DOM
-            document.getElementById('lb').innerHTML = contentTemplate(data.entry[this_id]);
-
-        }
-
-        function closeLightBox(){
-            //change the css stles of these elements to hide.
-            light.style.display='none';
-            overlay.style.display='none';
-            //re-insert the template to allow the next click event to parse.
-            light.innerHTML = '<script id="content-template" type="text/x-handlebars-template"><a href = "javascript:void(0)" onclick = "closeLightBox();" class="close">Close<\/a><img src="{{gsx$logo.$t}}"\/><ul>{{{gsx$html.$t}}}<\/ul><\/script>';
-        } 
-         //console.log('♖ ♘ ♗ ♔ ♕ ♗ ♘ ♖ \n♙ ♙ ♙ ♙   ♙ ♙ ♙ \n\n        ♙    \n\n\n\n♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ \n♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜\n\n\n\nYour move.');
-
     </script>
 
 </body>   
