@@ -20,11 +20,14 @@
     <div id="lb" class="lb-content">
        <script id="content-template" type="text/x-handlebars-template">
             <a href = "javascript:void(0)" onclick = "closeLightBox();" class="close" >Close</a>
-            <img src="{{gsx$logo.$t}}"/>
-            <ul>
-                {{{gsx$html.$t}}}
-            </ul>
-
+            <div>{{gsx$loc.$t}}</div>
+            <div>{{gsx$dates.$t}} | {{gsx$type.$t}}</div>
+            <div>{{gsx$role.$t}}</div>
+            <figure>
+                <img src="{{gsx$logo.$t}}"/>
+                <figcaption>{{gsx$project.$t}}</figcaption>
+            </figure>
+            {{{gsx$html.$t}}}
        </script>
     </div>
     <div role="main" id="main">
@@ -52,15 +55,15 @@
                     <div>
                         <figure id="figure-{{@index}}" class='figure' style='background-position-y:{{gsx$thumbpos.$t}}'>
                             {{gsx$company.$t}} : {{gsx$project.$t}} 
-                         </figure>
-                         <figcaption id="figcaption-{{@index}}" class="figcaption">
-                            {{gsx$company.$t}} 
-                            {{#if gsx$active.$t}}
-                                <a id='{{@index}}' class='foo' href='#'>{{gsx$project.$t}}</a>                           
-                            {{else}}                            
-                                <div>{{gsx$project.$t}}</div>
-                            {{/if}}                            
-                        </figcaption>
+                             <figcaption id="figcaption-{{@index}}" class="figcaption">
+                                {{gsx$company.$t}} 
+                                {{#if gsx$active.$t}}
+                                    <a id='{{@index}}' class='foo' href='#'>{{gsx$project.$t}}</a>                           
+                                {{else}}                            
+                                    <div>{{gsx$project.$t}}</div>
+                                {{/if}}                            
+                            </figcaption>
+                        </figure>
                     </div>
                 </article>          
                 {{/entry}}
@@ -114,7 +117,7 @@
                 //Check to make sure the element clicked is a div.
                 if(e.target && e.target.parentNode.nodeName == "DIV"){
                     //set variable to that of the anchor tag id.
-                    this_id = e.target.parentNode.childNodes[3].childNodes[1].id;
+                    this_id = e.target.parentNode.childNodes[1].firstElementChild.firstElementChild.id;
                     
                     //create variables for elements.
                     light = document.getElementById('lb'),    
@@ -138,9 +141,9 @@
                 light.style.display='none';
                 overlay.style.display='none';
                 //re-insert the template to allow the next click event to parse.
-                light.innerHTML = '<script id="content-template" type="text/x-handlebars-template"><a href="#" class="close">Close<\/a><img src="{{gsx$logo.$t}}"\/><ul>{{{gsx$html.$t}}}<\/ul><\/script>';
+                light.innerHTML = '<script id="content-template" type="text/x-handlebars-template"><a href="#" class="close">Close<\/a><figure><figcaption>{{gsx$dates.$t}} | {{gsx$type.$t}}<\/figcaption><img src="{{gsx$logo.$t}}"\/><\/figure>{{{gsx$html.$t}}}<\/script>';
             })
-            console.log('♖ ♘ ♗ ♔ ♕ ♗ ♘ ♖ \n♙ ♙ ♙ ♙   ♙ ♙ ♙ \n\n        ♙    \n\n\n\n♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ \n♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜\n\n\n\nYour move.');       
+            //console.log('♖ ♘ ♗ ♔ ♕ ♗ ♘ ♖ \n♙ ♙ ♙ ♙   ♙ ♙ ♙ \n\n        ♙    \n\n\n\n♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ \n♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜\n\n\n\nYour move.');       
         })();      
     </script>
 
