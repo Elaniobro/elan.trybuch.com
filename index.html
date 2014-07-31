@@ -10,24 +10,36 @@
   <meta name="description" content="Elan Trybuch is a well versed Front End engineer, working on client side websites and projects with over 5+ years of experience. Elan Trybuch is an affordable, honest businessman who is easily accesible and great to work with.">
   <link rel="stylesheet" href="com/css/styles.css" type="text/css" />
   <!--<script src="com/js/mustache.js"></script>   --> 
-  <script src="com/js/handlebars.js"></script> 
-  <script>
-       
-  </script>
 </head>
 <body>
     
     <div id="lb" class="lb-content">
        <script id="content-template" type="text/x-handlebars-template">
-            <a href = "javascript:void(0)" onclick = "closeLightBox();" class="close" >Close</a>
-            <div>{{gsx$loc.$t}}</div>
-            <div>{{gsx$dates.$t}} | {{gsx$type.$t}}</div>
-            <div>{{gsx$role.$t}}</div>
-            <figure>
-                <img src="{{gsx$logo.$t}}"/>
-                <figcaption>{{gsx$project.$t}}</figcaption>
-            </figure>
-            {{{gsx$html.$t}}}
+            <a href="#" class="close">Close</a>
+            <aside class="clr">
+                <figure>
+                    <img src="{{gsx$logo.$t}}">
+                    <figcaption>Project Role: {{gsx$role.$t}}</figcaption>
+                </figure>
+                <footer>
+                    {{#ifCond gsx$active.$t '==' 'yes'}}
+                    view project at: <a class="lb-link" href="{{gsx$pURL.$t}}" target="_blank">{{gsx$project.$t}}</a>
+                    {{/ifCond}}
+                </footer>
+            </aside>
+            <section id="lb-main">
+                <nav id="loc-date">
+                    <div>{{gsx$loc.$t}}</div>
+                    <div>{{gsx$dates.$t}}</div>
+                </nav>
+                <article>
+                    <div class="clr" id="loc-date">
+                        <div>{{gsx$loc.$t}}</div>
+                        <div>{{gsx$dates.$t}}</div>
+                    </div>
+                    {{{gsx$html.$t}}}
+                </article>
+            </section>        
        </script>
     </div>
     <div role="main" id="main">
@@ -35,8 +47,8 @@
             <nav>
                 <h1 id="name"><a href="#biography">Portfolio Site of Elan Trybuch, New York, NY</a></h1>
                 <ul id="social">
-                    <li class="social"><a id="twitter"  href="http://twitter.com/home?status=@elaniobro%20I%20saw%20your%20site%20and%20would%20like%20to%20connect.%20%23WebDeveloper%20#Frontend%20#HTML%20#CSS%20#javaScript%20" title="Read the most recent tweets">Send a tweet @elaniobro</a></li>
-                    <li class="social"><a id="googleplus" title="Interact with me on +google" href="https://plus.google.com/115362919020637883393/">Follow Elan on +Google</a></li>
+                    <li class="social"><a id="twitter" href="https://twitter.com/home?status=@elaniobro%20I%20saw%20your%20site%20and%20would%20like%20to%20connect.%20%23WebDeveloper%20#Frontend%20#HTML%20#CSS%20#javaScript%20" title="Read the most recent tweets" target="_blank">Send a tweet @elaniobro</a></li>
+                    <li class="social"><a id="googleplus" title="Interact with me on +google" href="https://plus.google.com/115362919020637883393/" target="_blank">Follow Elan on +Google</a></li>
                      <li class="social"><a id="linkedin"  title="Become a part of my professional circle" href="http://www.linkedin.com/in/elantrybuch" target="_blank">View my work history</a></li>
                     <li class="social"><a id="github"  title="Collobrate on open source projects with me" href="https://github.com/Elaniobro" target="_blank">Check out my code</a></li>
                     <li class="social"><a id="skype" title="Save on long distance calls" href="skype:elaniobro?call">Call me on Skype</a></li>
@@ -51,7 +63,7 @@
            <!-- Article content goes here via json feed -->
            <script id="thumb-template" type="text/x-handlebars-template">
                 {{#entry}}
-                <article id='{{gsx$tag.$t}}' class='clr'>
+                <article id='{{gsx$tag.$t}}' class='item clr'>
                     <div>
                         <figure id="figure-{{@index}}" class='figure' style='background-position-y:{{gsx$thumbpos.$t}}'>
                             {{gsx$company.$t}} : {{gsx$project.$t}} 
@@ -67,11 +79,8 @@
                     </div>
                 </article>          
                 {{/entry}}
-                <div id="overlay">
-                    
-                </div>
-
-            </script>
+                <div id="overlay"></div>
+            </script>                
         </section><!-- /section -->
         <footer id="footer">
             <nav>
@@ -80,7 +89,8 @@
             <div class="clr"></div>
         </footer><!-- /footer -->
     </div><!-- /main -->
-    <script>
+   <script src="com/js/handlebars.js"></script> 
+   <script>
         (function() {
             // Create <script> tag element
             var res = document.createElement('script');
@@ -108,20 +118,24 @@
 
             // Footer copyright year date creation.
             var date = new Date(),
-                year = date.getFullYear();
+                year = date.getFullYear()
+                light = document.getElementById('lb'),    
+                overlay = document.getElementById('overlay'),
+                curr = 0;
             // Adding the Year for copyright
             document.getElementById('year').innerHTML = year;       
 
             //Get the element to add a click listener to open lightbox
             document.getElementById('content').addEventListener("click", function(e){
+                curr = e.target.parentNode.childNodes[1].firstElementChild.firstElementChild.id;
                 //Check to make sure the element clicked is a div.
                 if(e.target && e.target.parentNode.nodeName == "DIV"){
                     //set variable to that of the anchor tag id.
                     this_id = e.target.parentNode.childNodes[1].firstElementChild.firstElementChild.id;
-                    
                     //create variables for elements.
                     light = document.getElementById('lb'),    
                     overlay = document.getElementById('overlay');
+
                     //change the css styles of these elements to make visible.
                     light.style.display='block';            
                     overlay.style.display='block';
@@ -134,15 +148,56 @@
                     document.getElementById('lb').innerHTML = contentTemplate(data.entry[this_id]);
                }
             })
+/*
+            document.getElementById('twitter').addEventListener("click", function(e){
+                light.style.display='block';            
+                overlay.style.display='block';
+                light.innerHTML = '<iframe src="https://twitter.com/home?status=@elaniobro%20I%20saw%20your%20site%20and%20would%20like%20to%20connect.%20%23WebDeveloper%20#Frontend%20#HTML%20#CSS%20#javaScript%20"><\/iframe>'
+            })
+*/
             //Add click event to the close button to close lightbox.
-            document.getElementById('lb').addEventListener("click", function(e){
-                console.log(e.target.nodeName);
+            document.getElementById('lb').addEventListener("click", function(e){                
                 //change the css stles of these elements to hide.
                 light.style.display='none';
                 overlay.style.display='none';
                 //re-insert the template to allow the next click event to parse.
-                light.innerHTML = '<script id="content-template" type="text/x-handlebars-template"><a href="#" class="close">Close<\/a><figure><figcaption>{{gsx$dates.$t}} | {{gsx$type.$t}}<\/figcaption><img src="{{gsx$logo.$t}}"\/><\/figure>{{{gsx$html.$t}}}<\/script>';
+                light.innerHTML = '<script id="content-template" type="text/x-handlebars-template"><a href="#" class="close">Close<\/a><aside><figure><img src="{{gsx$logo.$t}}"><figcaption>Project Role: {{gsx$role.$t}}<\/figcaption><\/figure><footer>{{#ifCond gsx$active.$t "==" "yes"}}view project at: <a class="lb-link" href="{{gsx$pURL.$t}}" target="_blank">{{gsx$project.$t}}<\/a>{{/ifCond}}<\/footer><\/aside><section id="lb-main"><nav id="loc-date"><div>{{gsx$loc.$t}}<\/div><div>{{gsx$dates.$t}}<\/div><\/nav><article><div class="clr" id="loc-date"><div>{{gsx$loc.$t}}<\/div><div>{{gsx$dates.$t}}<\/div><\/div>{{{gsx$html.$t}}}<\/article><\/section><\/script>';
+                e.preventDefault();
             })
+
+            window.onkeyup = keyUp;
+            if(light.style.display !== 'none'){
+                function keyUp (e){
+                    if(e.keyCode==39){
+                        console.log("rightkey curr: " + ++curr);
+                    }else if (e.keyCode==37) {
+                        console.log("leftkey curr: " + --curr);
+                    }
+                }
+            }
+            //Handlebar register helper for conditional operators.
+            Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+                switch (operator) {
+                    case '==':
+                        return (v1 == v2) ? options.fn(this) : options.inverse(this);
+                    case '===':
+                        return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                    case '<':
+                        return (v1 < v2) ? options.fn(this) : options.inverse(this);
+                    case '<=':
+                        return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+                    case '>':
+                        return (v1 > v2) ? options.fn(this) : options.inverse(this);
+                    case '>=':
+                        return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+                    case '&&':
+                        return (v1 && v2) ? options.fn(this) : options.inverse(this);
+                    case '||':
+                        return (v1 || v2) ? options.fn(this) : options.inverse(this);
+                    default:
+                        return options.inverse(this);
+                }
+            });
             //console.log('♖ ♘ ♗ ♔ ♕ ♗ ♘ ♖ \n♙ ♙ ♙ ♙   ♙ ♙ ♙ \n\n        ♙    \n\n\n\n♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ \n♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜\n\n\n\nYour move.');       
         })();      
     </script>
