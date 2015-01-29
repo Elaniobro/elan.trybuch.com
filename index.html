@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,13 +8,14 @@
   <meta name="keywords" content="Elan, Elan Trybuch, Trybuch, Frontend, Front End, Engineer, Developer, Designer, javascript, HTML, css, css3, HTML5, jQuery, digital, Digital marketing, advertising, media planning, SEM, Search engine marketing, search engine optimization, SEO, Internet marketing, communications, Cost-effective, brand awareness, viral campaign, online market">
   <meta name="description" content="Elan Trybuch is a well versed Front End engineer, working on client side websites and projects with over 5+ years of experience. Elan Trybuch is an affordable, honest businessman who is easily accesible and great to work with.">
   <link rel="stylesheet" href="com/css/styles.css" type="text/css" />
-  <!--<script src="com/js/mustache.js"></script>   --> 
+ <script src="com/js/handlebars.js"></script> 
+
 </head>
 <body>
     
     <div id="lb" class="lb-content">
        <script id="content-template" type="text/x-handlebars-template">
-            <a href="#" class="close">Close</a>
+            <a href="#" class="close" id="lb-close">Close</a>
             <aside class="clr">
                 <figure>
                     <img src="{{gsx$logo.$t}}">
@@ -23,7 +23,7 @@
                 </figure>
                 <footer>
                     {{#ifCond gsx$active.$t '==' 'yes'}}
-                    view project at: <a class="lb-link" href="{{gsx$pURL.$t}}" target="_blank">{{gsx$project.$t}}</a>
+                    view project at: <a class="lb-link" href="{{gsx$purl.$t}}" target="_blank">{{gsx$project.$t}}</a>
                     {{/ifCond}}
                 </footer>
             </aside>
@@ -65,7 +65,7 @@
                 {{#entry}}
                 <article id='{{gsx$tag.$t}}' class='item clr'>
                     <div>
-                        <figure id="figure-{{@index}}" class='figure' style='background-position-y:{{gsx$thumbpos.$t}}'>
+                        <figure id="figure-{{@index}}" class='figure' style='background-position:0 {{gsx$thumbpos.$t}}'>
                             {{gsx$company.$t}} : {{gsx$project.$t}} 
                              <figcaption id="figcaption-{{@index}}" class="figcaption">
                                 {{gsx$company.$t}} 
@@ -79,17 +79,16 @@
                     </div>
                 </article>          
                 {{/entry}}
-                <div id="overlay"></div>
+                <div id="overlay" class="close"></div>
             </script>                
         </section><!-- /section -->
         <footer id="footer">
             <nav>
-              <span id="copy">&copy;<span id="year"></span>  &bull; All Rights Reserved &bull; <a href="elan_trybuch_resume.pdf">download resume</a> &bull; <a href="http://news.trybuch.com">News</a></span>
+              <span id="copy">&copy;<span id="year"></span>  &bull; All Rights Reserved &bull; <a href="elan_trybuch_resume.pdf">Resume</a> &bull; <a href="http://news.trybuch.com">News</a></span>
             </nav><!-- /nav -->
             <div class="clr"></div>
         </footer><!-- /footer -->
     </div><!-- /main -->
-   <script src="com/js/handlebars.js"></script> 
    <script>
         (function() {
             // Create <script> tag element
@@ -115,7 +114,6 @@
                     document.getElementById('content').innerHTML = thumbTemplate(data);
                 }
             }    
-
             // Footer copyright year date creation.
             var date = new Date(),
                 year = date.getFullYear()
@@ -148,14 +146,13 @@
                     document.getElementById('lb').innerHTML = contentTemplate(data.entry[this_id]);
                }
             })
-/*
-            document.getElementById('twitter').addEventListener("click", function(e){
-                light.style.display='block';            
-                overlay.style.display='block';
-                light.innerHTML = '<iframe src="https://twitter.com/home?status=@elaniobro%20I%20saw%20your%20site%20and%20would%20like%20to%20connect.%20%23WebDeveloper%20#Frontend%20#HTML%20#CSS%20#javaScript%20"><\/iframe>'
-            })
-*/
             //Add click event to the close button to close lightbox.
+            var close = ['overlay', 'lb-close'];
+            //console.log(close);
+            for (var i = 0; i < close.length; i++){
+                //console.log(close[i]);
+            }
+
             document.getElementById('lb').addEventListener("click", function(e){                
                 //change the css stles of these elements to hide.
                 light.style.display='none';
@@ -165,7 +162,7 @@
                 e.preventDefault();
             })
 
-            window.onkeyup = keyUp;
+/*            window.onkeyup = keyUp;
             if(light.style.display !== 'none'){
                 function keyUp (e){
                     if(e.keyCode==39){
@@ -175,6 +172,7 @@
                     }
                 }
             }
+*/            
             //Handlebar register helper for conditional operators.
             Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
                 switch (operator) {
@@ -198,7 +196,7 @@
                         return options.inverse(this);
                 }
             });
-            //console.log('♖ ♘ ♗ ♔ ♕ ♗ ♘ ♖ \n♙ ♙ ♙ ♙   ♙ ♙ ♙ \n\n        ♙    \n\n\n\n♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟ \n♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜\n\n\n\nYour move.');       
+           console.log('  a b c d e f g h\n  _______________\n8|♜ ♞ ♝ ♛ ♚     ♜\n7|♟ ♟ ♟ ♟   ♕ ♟ ♟ \n6|          ♞\n5|    ♝   ♟\n4|    ♗   ♙   \n3|\n2|♙ ♙ ♙ ♙   ♙ ♙ ♙ \n1|♖ ♘ ♗ ♔     ♘ ♖ \n\n\n\n\nCheck Mate.');       
         })();      
     </script>
 
