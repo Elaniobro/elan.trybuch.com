@@ -12,6 +12,13 @@ import Header from '@/components/Header/Header'
 export default {
   components: {
     Header
+  },
+  head() {
+    return {
+      script: [
+        { src: 'https://identity.netlify.com/v1/netlify-identity-widget.js' }
+      ]
+    }
   }
 }
 </script>
