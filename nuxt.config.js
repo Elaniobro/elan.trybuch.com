@@ -1,3 +1,7 @@
+require('dotenv').config()
+
+const env = process.env.NODE_ENV.toUpperCase()
+
 export default {
   /*
    ** Nuxt rendering mode
@@ -34,7 +38,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [],
+  plugins: ['~/plugins/observer'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -52,10 +56,25 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ['@nuxtjs/eslint-module'],
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    /*
+     ** You can extend webpack config here
+     */
+    loaders: {
+      scss: {
+        data: '@import "~@/assets/sass/vars/index.scss";',
+      },
+    },
+  },
+  vue: {
+    config: {
+      productionTip: false,
+      devtools: true,
+    },
+  },
 }
