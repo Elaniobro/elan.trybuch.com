@@ -1,7 +1,9 @@
 # elan.trybuch.com | Portfolio
 
 ## 🛡Badges
-[![Netlify Status](https://api.netlify.com/api/v1/badges/3e50d41b-6a61-4f66-90c1-ca878538111f/deploy-status)](https://app.netlify.com/sites/naughty-ritchie-d695e8/deploys)
+![follow on Twitte](https://img.shields.io/twitter/follow/elaniobro?style=social&logo=twitter)    ![GitHub followers](https://img.shields.io/github/followers/elaniobro?style=social)
+
+![Netlify](https://img.shields.io/netlify/3e50d41b-6a61-4f66-90c1-ca878538111f)  ![GitHub issues](https://img.shields.io/github/issues/elaniobro/elan.trybuch.com)  ![GitHub](https://img.shields.io/github/license/elaniobro/elan.trybuch.com)  ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/elaniobro/elan.trybuch.com)  ![GitHub top language](https://img.shields.io/github/languages/top/elaniobro/elan.trybuch.com)  ![GitHub pull requests](https://img.shields.io/github/issues-pr/elaniobro/elan.trybuch.com)  ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/elaniobro/elan.trybuch.com)
 
 
 
