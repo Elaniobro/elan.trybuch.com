@@ -1,5 +1,5 @@
 # elan.trybuch.com
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3e50d41b-6a61-4f66-90c1-ca878538111f/deploy-status)](https://app.netlify.com/sites/naughty-ritchie-d695e8/deploys)
 ## Build Setup
 
 ```bash
