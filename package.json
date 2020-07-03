@@ -11,10 +11,14 @@
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
     "lint": "yarn lint:js && yarn lint:style",
-    "test": "jest"
+    "test": "CI=true jest --config ./jest.config.js --watch",
+    "test:staged": "CI=true jest --config ./jest.config.js --silent -o"
   },
   "lint-staged": {
-    "*.{js,vue}": "eslint",
+    "*.{js,vue}": [
+      "eslint",
+      "test:staged"
+    ],
     "*.{css,vue}": "stylelint"
   },
   "husky": {
