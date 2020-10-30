@@ -21,6 +21,7 @@ export default {
   },
 }
 </script>
+
 <style lang="scss">
 .logo {
   &__wrapper {
@@ -28,6 +29,16 @@ export default {
   }
   &__svg {
     border: none;
+    animation: signature 2s;
+  }
+
+  @keyframes signature {
+    0% {
+      clip-path: polygon(153px 167px, 161px 171px, 177px 151px, 167px 143px);
+    }
+    100% {
+      clip-path: polygon(24px 415px, 921px 450px, 872px -26px, 8px 7px);
+    }
   }
 }
 </style>

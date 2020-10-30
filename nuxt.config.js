@@ -1,6 +1,6 @@
-require('dotenv').config()
+// require('dotenv').config()
 
-const env = process.env.NODE_ENV.toUpperCase()
+// const env = process.env.NODE_ENV.toUpperCase()
 
 export default {
   /*
@@ -8,6 +8,10 @@ export default {
    ** See https://nuxtjs.org/api/configuration-mode
    */
   mode: 'spa',
+  // env: {
+  //   API_URL: process.env[`API_${env}_URL`],
+  //   API_KEY: process.env[`API_${env}_KEY`],
+  // },
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -29,6 +33,12 @@ export default {
       },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [
+      {
+        crossorigin: 'anonymous',
+        src: 'https://kit.fontawesome.com/64d511ef30.js',
+      },
+    ],
   },
   /*
    ** Global CSS
@@ -52,6 +62,7 @@ export default {
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
+    '@nuxtjs/color-mode',
   ],
   /*
    ** Nuxt.js modules
@@ -67,8 +78,16 @@ export default {
      */
     loaders: {
       scss: {
-        data: '@import "~@/assets/sass/vars/index.scss";',
+        data: '@import "~@/assets/sass/index.scss";',
       },
+    },
+    extend(config, { isDev, isClient }) {
+      if (isClient) {
+        config.node = {
+          fs: 'empty',
+          child_process: 'empty',
+        }
+      }
     },
   },
   vue: {

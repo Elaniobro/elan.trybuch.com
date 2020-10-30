@@ -11,13 +11,12 @@
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
     "lint": "yarn lint:js && yarn lint:style",
-    "test": "CI=true jest --config ./jest.config.js --watch",
+    "test": "CI=true jest --config ./jest.config.js --colors",
     "test:staged": "CI=true jest --config ./jest.config.js --silent -o"
   },
   "lint-staged": {
     "*.{js,vue}": [
-      "eslint",
-      "test:staged"
+      "eslint"
     ],
     "*.{css,vue}": "stylelint"
   },
@@ -37,6 +36,7 @@
     "vue-observe-visibility": "^0.4.6"
   },
   "devDependencies": {
+    "@nuxtjs/color-mode": "^2.0.0",
     "@nuxtjs/eslint-config": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "@nuxtjs/stylelint-module": "^4.0.0",
@@ -53,12 +53,15 @@
     "jest-image-snapshot": "^4.0.2",
     "jest-puppeteer": "^4.4.0",
     "jest-serializer-vue": "^2.0.2",
+    "jsdoc": "^3.6.5",
+    "jsdoc-vuejs": "^3.0.9",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
     "puppeteer": "^5.0.0",
     "stylelint": "^13.6.1",
     "stylelint-config-prettier": "^8.0.1",
     "stylelint-config-standard": "^20.0.0",
+    "tui-jsdoc-template": "^1.2.2",
     "vue-jest": "^3.0.4"
   }
 }
