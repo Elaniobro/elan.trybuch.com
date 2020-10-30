@@ -34,7 +34,7 @@ html {
 }
 
 .button--green:hover {
-  color: #fff;
+  color: #ffffff;
   background-color: #3b8070;
 }
 
@@ -49,7 +49,7 @@ html {
 }
 
 .button--grey:hover {
-  color: #fff;
+  color: #ffffff;
   background-color: #35495e;
 }
 </style>
