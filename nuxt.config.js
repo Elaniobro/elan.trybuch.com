@@ -1,8 +1,12 @@
-// require('dotenv').config()
+require('dotenv').config()
 
 // const env = process.env.NODE_ENV.toUpperCase()
-
+const baseUrl = 'https://elan.trybuch.com'
 export default {
+  env: {
+    baseUrl: process.env.BASE_URL || baseUrl,
+    API_HASURA_URL: 'https://skilled-fowl-79.hasura.app/v1/graphql'
+  },
   /*
    ** Nuxt rendering mode
    ** See https://nuxtjs.org/api/configuration-mode
@@ -29,16 +33,16 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || '',
-      },
+        content: process.env.npm_package_description || ''
+      }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     script: [
       {
         crossorigin: 'anonymous',
-        src: 'https://kit.fontawesome.com/64d511ef30.js',
-      },
-    ],
+        src: 'https://kit.fontawesome.com/64d511ef30.js'
+      }
+    ]
   },
   /*
    ** Global CSS
@@ -48,7 +52,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['~/plugins/observer'],
+  plugins: ['~/plugins/hasura', '~/plugins/observer'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -58,16 +62,17 @@ export default {
    ** Nuxt.js dev-modules
    */
   buildModules: [
+    '@nuxtjs/color-mode',
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
-    '@nuxtjs/color-mode',
+    '@nuxtjs/dotenv'
   ],
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/eslint-module'],
+  modules: ['@nuxt/http'],
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
@@ -78,22 +83,22 @@ export default {
      */
     loaders: {
       scss: {
-        data: '@import "~@/assets/sass/index.scss";',
-      },
+        data: '@import "~@/assets/sass/index.scss";'
+      }
     },
     extend(config, { isDev, isClient }) {
       if (isClient) {
         config.node = {
           fs: 'empty',
-          child_process: 'empty',
+          child_process: 'empty'
         }
       }
-    },
+    }
   },
   vue: {
     config: {
       productionTip: false,
-      devtools: true,
-    },
-  },
+      devtools: true
+    }
+  }
 }
