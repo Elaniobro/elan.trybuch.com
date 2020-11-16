@@ -4,6 +4,6 @@ module.exports = {
   // https://stylelint.io/user-guide/configuration
   rules: {
     'color-no-invalid-hex': true,
-    'color-hex-length': 'long',
-  },
+    'color-hex-length': 'long'
+  }
 }
