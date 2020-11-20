@@ -7,7 +7,7 @@ beforeEach(() => {
   wrapper = shallowMount(ColorModePicker, {
     data() {
       return {
-        colors: ['light', 'dark'],
+        colors: ['light', 'dark']
       }
     },
     mocks: {
@@ -15,9 +15,9 @@ beforeEach(() => {
       // before mounting component
       $colorMode: {
         preference: 'dark',
-        value: 'dark',
-      },
-    },
+        value: 'dark'
+      }
+    }
   })
 })
 
@@ -57,7 +57,7 @@ describe('ColorModePicker.vue methods', () => {
     wrapper.find('.color-mode-picker__list--dark').trigger('click')
     expect(wrapper.vm.getClasses('dark')).toEqual({
       preferred: true,
-      selected: true,
+      selected: true
     })
   })
 
@@ -65,7 +65,7 @@ describe('ColorModePicker.vue methods', () => {
     const lightWrapper = shallowMount(ColorModePicker, {
       data() {
         return {
-          colors: ['light', 'dark'],
+          colors: ['light', 'dark']
         }
       },
       mocks: {
@@ -73,13 +73,13 @@ describe('ColorModePicker.vue methods', () => {
         // before mounting component
         $colorMode: {
           preference: 'light',
-          value: 'light',
-        },
-      },
+          value: 'light'
+        }
+      }
     })
     expect(lightWrapper.vm.getClasses('dark')).toEqual({
       preferred: false,
-      selected: false,
+      selected: false
     })
   })
 })

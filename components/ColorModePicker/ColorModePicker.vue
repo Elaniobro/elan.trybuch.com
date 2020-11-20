@@ -8,7 +8,7 @@
           [`color-mode-picker__list--${color}`]: true,
           'color-mode-picker__list--item': true,
           'list__item--preferred': getClasses(color).preferred,
-          'list__item--selected': !getClasses(color).selected,
+          'list__item--selected': !getClasses(color).selected
         }"
         @click="$colorMode.preference = color"
       >
@@ -34,7 +34,7 @@ export default {
   data() {
     // ['system', 'light', 'dark']
     return {
-      colors: ['sun', 'moon'],
+      colors: ['sun', 'moon']
     }
   },
 
@@ -51,10 +51,10 @@ export default {
       }
       return {
         preferred: color === this.$colorMode.preference,
-        selected: color === this.$colorMode.value,
+        selected: color === this.$colorMode.value
       }
-    },
-  },
+    }
+  }
 }
 </script>
 
