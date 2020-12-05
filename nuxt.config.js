@@ -3,24 +3,65 @@ require('dotenv').config()
 // const env = process.env.NODE_ENV.toUpperCase()
 const baseUrl = 'https://elan.trybuch.com'
 export default {
+  /*
+   ** Nuxt.js dev-modules
+   */
+  buildModules: [
+    '@nuxtjs/color-mode',
+    // Doc: https://github.com/nuxt-community/eslint-module
+    '@nuxtjs/dotenv',
+    '@nuxtjs/eslint-module',
+    '@nuxt/image',
+    // Doc: https://github.com/nuxt-community/stylelint-module
+    '@nuxtjs/stylelint-module'
+  ],
+
+  /*
+   ** Build configuration
+   ** See https://nuxtjs.org/api/configuration-build/
+   */
+  build: {
+    /*
+     ** You can extend webpack config here
+     */
+    loaders: {
+      scss: {
+        data: '@import "~@/assets/sass/index.scss";'
+      }
+    },
+    extend(config, { isDev, isClient }) {
+      if (isClient) {
+        config.node = {
+          fs: 'empty',
+          child_process: 'empty'
+        }
+      }
+    }
+  },
+
+  /*
+   ** Auto import components
+   ** See https://nuxtjs.org/api/configuration-components
+   */
+  components: true,
+
+  /*
+   ** Global CSS
+   */
+  css: [],
+
+  /*
+   ** env variables
+   */
   env: {
     baseUrl: process.env.BASE_URL || baseUrl,
     API_HASURA_URL: 'https://skilled-fowl-79.hasura.app/v1/graphql'
   },
-  /*
-   ** Nuxt rendering mode
-   ** See https://nuxtjs.org/api/configuration-mode
-   */
-  mode: 'spa',
   // env: {
   //   API_URL: process.env[`API_${env}_URL`],
   //   API_KEY: process.env[`API_${env}_KEY`],
   // },
-  /*
-   ** Nuxt target
-   ** See https://nuxtjs.org/api/configuration-target
-   */
-  target: 'static',
+
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -44,57 +85,41 @@ export default {
       }
     ]
   },
+
   /*
-   ** Global CSS
+   ** @nuxt/image options
    */
-  css: [],
+  image: {
+    providers: {
+      cloudinary: {
+        baseURL: 'https://res.cloudinary.com/nuxt/image/upload/'
+      }
+    }
+  },
+
+  /*
+   ** Nuxt.js modules
+   */
+  modules: ['@nuxt/http'],
+
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
   plugins: ['~/plugins/hasura', '~/plugins/observer'],
+
   /*
-   ** Auto import components
-   ** See https://nuxtjs.org/api/configuration-components
+   ** Nuxt rendering mode
+   ** See https://nuxtjs.org/api/configuration-mode
    */
-  components: true,
+  ssr: false,
+
   /*
-   ** Nuxt.js dev-modules
+   ** Nuxt target
+   ** See https://nuxtjs.org/api/configuration-target
    */
-  buildModules: [
-    '@nuxtjs/color-mode',
-    // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module',
-    // Doc: https://github.com/nuxt-community/stylelint-module
-    '@nuxtjs/stylelint-module',
-    '@nuxtjs/dotenv'
-  ],
-  /*
-   ** Nuxt.js modules
-   */
-  modules: ['@nuxt/http'],
-  /*
-   ** Build configuration
-   ** See https://nuxtjs.org/api/configuration-build/
-   */
-  build: {
-    /*
-     ** You can extend webpack config here
-     */
-    loaders: {
-      scss: {
-        data: '@import "~@/assets/sass/index.scss";'
-      }
-    },
-    extend(config, { isDev, isClient }) {
-      if (isClient) {
-        config.node = {
-          fs: 'empty',
-          child_process: 'empty'
-        }
-      }
-    }
-  },
+  target: 'static',
+
   vue: {
     config: {
       productionTip: false,
