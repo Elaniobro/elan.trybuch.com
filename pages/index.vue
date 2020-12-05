@@ -20,13 +20,16 @@ const QUERY = gql`
     portfolio(order_by: { id: asc }) {
       active
       company
+      cURL
       id
+      location
       role
       pURL
-      location
-      type
-      cURL
       projectName
+      slugCompany
+      slugProjectName
+      thumbnails
+      type
     }
   }
 `
