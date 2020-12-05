@@ -47,7 +47,7 @@ export default {
   components: { ColorModePicker },
   data() {
     return {}
-  },
+  }
 }
 </script>
 <style lang="scss">
