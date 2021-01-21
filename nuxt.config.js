@@ -13,7 +13,8 @@ export default {
     '@nuxtjs/eslint-module',
     '@nuxt/image',
     // Doc: https://github.com/nuxt-community/stylelint-module
-    '@nuxtjs/stylelint-module'
+    '@nuxtjs/stylelint-module',
+    '@nuxt/typescript-build'
   ],
 
   /*
