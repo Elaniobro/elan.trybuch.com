@@ -1,8 +1,11 @@
 <template>
   <div>
-    Project Name is: {{ project[0].projectName }}
+    Company Name is: {{ projects[0].company }}
     <hr />
-    <GridItem :data="project[0]" />
+    <div v-for="project in projects" :key="project.id">
+      <GridItem :data="project" />
+      <hr />
+    </div>
   </div>
 </template>
 <script>
@@ -18,23 +21,27 @@ export default {
       query: print(gql`
         query MyQuery {
           portfolio(
-            where: { slugProjectName: { _eq: "${params.projectName}" } }
+            where: { slugCompany: { _eq: "${params.company}" } }
           ) {
             company
             cURL
+            pURL
             date
             desc
+            id
             location
             logoURL
             projectName
             role
+            slugCompany
+            slugProjectName
             title
           }
         }
       `)
     })
     return {
-      project: data.portfolio
+      projects: data.portfolio
     }
   },
   data() {
