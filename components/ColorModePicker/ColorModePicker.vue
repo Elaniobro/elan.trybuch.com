@@ -1,26 +1,23 @@
 <template>
   <div class="color-mode-picker__wrapper">
-    <ul class="color-mode-picker__list">
-      <li
-        v-for="color of colors"
-        :key="color"
-        :class="{
-          [`color-mode-picker__list--${color}`]: true,
-          'color-mode-picker__list--item': true,
-          'list__item--preferred': getClasses(color).preferred,
-          'list__item--selected': !getClasses(color).selected
-        }"
-        @click="$colorMode.preference = color"
-      >
-        <span class="icon__wrapper">
-          <i
-            :class="`fas fa-${color} fa-2x`"
-            @click="$colorMode.preference = color"
-          >
-          </i>
+    <div style="display: block">
+      <label class="switch" for="checkbox">
+        <input id="checkbox" type="checkbox" :checked="isChecked" />
+        <div class="slider round" @click="handleCheck()"></div>
+        <span
+          v-for="color of colors"
+          :key="color"
+          :class="{
+            [`color-mode-picker__list--${color}`]: true,
+            'color-mode-picker__list--item': true,
+            'list__item--selected': !getClasses(color).selected
+          }"
+          @click="$colorMode.preference = color"
+        >
+          <i :class="`fas fa-${color} fa`" @click="handleCheck()"></i>
         </span>
-      </li>
-    </ul>
+      </label>
+    </div>
   </div>
 </template>
 
@@ -32,9 +29,10 @@
 export default {
   name: 'ColorModePicker',
   data() {
-    // ['system', 'light', 'dark']
     return {
-      colors: ['sun', 'moon']
+      isChecked: false,
+      colors: ['sun', 'moon'],
+      colorMode: null
     }
   },
 
@@ -49,10 +47,19 @@ export default {
       if (this.$colorMode.unknown) {
         return {}
       }
+
+      console.log(this.$colorMode)
+
+      this.colorMode = this.$colorMode.preference
       return {
         preferred: color === this.$colorMode.preference,
         selected: color === this.$colorMode.value
       }
+    },
+
+    handleCheck(color) {
+      this.$colorMode.preference = this.colorMode
+      this.isChecked = !this.isChecked
     }
   }
 }
@@ -82,7 +89,6 @@ export default {
       display: none;
       border-radius: 3px;
       margin-top: 2px;
-      background: var(--bg);
       color: var(--bg-invert);
       opacity: 0.75;
     }
@@ -93,10 +99,75 @@ export default {
     &--light {
       background: var(--bg-invert);
     }
+
+    &--sun {
+      left: 3px;
+      position: relative;
+      top: 7px;
+    }
+
+    &--moon {
+      position: relative;
+      right: -30px;
+      top: 7px;
+    }
   }
 
   .icon__wrapper {
     color: var(--color);
   }
+}
+// <label class="switch" for="toggle">
+//   <input id="toggle" class="checkbox" type="checkbox" />
+// </label>
+.switch {
+  display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+}
+
+.switch input {
+  // display: none;
+  position: absolute;
+  bottom: -20px;
+}
+
+.slider {
+  background-color: #cccccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+
+  &::before {
+    background-color: var(--bg-invert);
+    bottom: 4px;
+    content: '';
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: 0.4s;
+    width: 26px;
+  }
+}
+input:checked + .slider {
+  background-color: var(--bg);
+}
+
+input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+  border: 1px solid var(--color-primary);
+}
+
+.slider.round::before {
+  border-radius: 50%;
 }
 </style>

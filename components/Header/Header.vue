@@ -64,7 +64,7 @@ export default {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 8px;
-    height: 30px;
+    height: 42px;
   }
   &__link {
     color: var(--color);

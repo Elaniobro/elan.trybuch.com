@@ -12,7 +12,7 @@
       :data-project="gridItem.projectName"
       @click="handleGridItemClick"
     >
-      <nuxt-link :to="`${gridItem.slugCompany}/${gridItem.slugProjectName}`">
+      <nuxt-link :to="`/${gridItem.slugCompany}/${gridItem.slugProjectName}`">
         <figure class="grid__figure--wrapper">
           <nuxt-image
             src="https://res.cloudinary.com/df92rgcyi/image/upload/v1605715376/rockstar_games-red-dead-redemption-3.png"
@@ -47,9 +47,8 @@ export default {
   },
   methods: {
     handleGridItemClick(e) {
-      const id = e.target.dataset.id
-      const project = e.target.dataset.project
-      console.log({ e, id, project })
+      // const id = e.target.dataset.id
+      // const project = e.target.dataset.project
     }
   }
 }
