@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header.vue HTML matches its snapshot 1`] = `<div class="header__wrapper"></div>`;
+
+exports[`Header.vue matches its snapshot 1`] = `<div class="header__wrapper"></div>`;

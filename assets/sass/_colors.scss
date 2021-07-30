@@ -1,0 +1,30 @@
+// light - system
+:root {
+  --color: #000000;
+  --color-primary: #808080;
+  --color-secondary: #a1a1a1;
+  --bg: #ffffff;
+  --bg-invert: #000000;
+  --bg-primary: #f3f5f4;
+  --bg-secondary: #d0d0d0;
+  --bg-tertiary: #fbfbfb;
+  // --border-color: #dddddd; not used
+}
+
+.moon-mode {
+  --color: #ffffff;
+  --color-primary: #d0d0d0;
+  --color-secondary: #fbfbfb;
+  --bg: #303030;
+  --bg-invert: #ffffff;
+  --bg-primary: #303030;
+  --bg-secondary: #808080;
+  --bg-tertiary: #3e3e3e;
+  // --border-color: #dddddd; not used
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--color);
+  transition: background-color 0.3s;
+}
